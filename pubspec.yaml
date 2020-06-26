@@ -1,0 +1,56 @@
+name: super_app
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+  english_words: ^3.1.0
+  audioplayers: 0.14.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_name: ^0.0.1
+  flutter_launcher_icons: ^0.7.3
+
+flutter_launcher_name:
+  name: "Super App"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/super-icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/sounds/
+
+  fonts:
+  - family: Merienda
+    fonts:
+    - asset: assets/fonts/Merienda-Regular.ttf
+    - asset: assets/fonts/Merienda-Bold.ttf
+      weight: 900
+  - family: Montserrat
+    fonts:
+    - asset: assets/fonts/Montserrat-Regular.ttf
+    - asset: assets/fonts/Montserrat-Bold.ttf
+      weight: 900
+  - family: ProductSans
+    fonts:
+    - asset: assets/fonts/Product-Sans-Regular.ttf
+    - asset: assets/fonts/Product-Sans-Bold.ttf
+      weight: 900
