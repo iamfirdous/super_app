@@ -57,14 +57,14 @@ class _XylophonePageState extends State<XylophonePage> {
 
   @override
   initState() {
+    super.initState();
     SystemChrome.setEnabledSystemUIOverlays([]);
     player.loadAll(notes.map((e) => e.file).toList());
-    super.initState();
   }
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     super.dispose();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 }

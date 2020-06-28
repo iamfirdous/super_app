@@ -10,7 +10,7 @@ class AboutDevPage extends StatelessWidget {
     if (imageAsset != null) leadingWidget = Image.asset(imageAsset, width: 24.0);
 
     return Card(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         bottom: 24.0,
         left: 28.0,
         right: 28.0,

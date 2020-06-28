@@ -25,7 +25,7 @@ class _DicePageState extends State<DicePage> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FlatButton(
-          padding: EdgeInsets.all(0),
+          padding: const EdgeInsets.all(0),
           onPressed: rollDice,
           child: Image.asset('assets/images/dice${ isLeft ? leftDice : rightDice }.png'),
         ),

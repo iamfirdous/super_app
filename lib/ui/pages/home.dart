@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
         border: Border.all(width: 0.4 , color: Colors.black),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: onTap,
         child: Column(
@@ -63,7 +63,7 @@ class HomePageState extends State<HomePage> {
         builder: (context, orientation) {
           return GridView.count(
             crossAxisCount: orientation == Orientation.portrait ? 3 : 5,
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             children: <Widget>[
               _getGridTile(
                 imageName: 'assets/images/startup-name.png',

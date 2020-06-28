@@ -42,7 +42,7 @@ class _Magic8BallPageState extends State<Magic8BallPage> {
             Expanded(
               flex: 2,
               child: FlatButton(
-                padding: EdgeInsets.all(36.0),
+                padding: const EdgeInsets.all(36.0),
                 onPressed: () => setState(() => ballNumber = Random().nextInt(5)),
                 child: Image.asset('assets/images/ball$ballNumber.png'),
               ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:super_app/util/quiz_brain.dart';
 
 const ROUTE_QUIZ_PAGE = '/quiz-page';
 
@@ -8,6 +10,69 @@ class QuizPage extends StatefulWidget {
 }
 
 class QuizPageState extends State<QuizPage> {
+  QuizBrain quizBrain;
+  List<bool> scoreKeeper = [];
+  int score = 0;
+
+  void addScore(bool userAnswer) {
+    setState(() {
+      if (quizBrain.isFinished()) {
+        Alert(
+          context: context,
+          title: 'Quiz finished',
+          desc: 'And your score is $score',
+          buttons: [
+            DialogButton(
+              child: Text(
+                'Okay',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+          type: AlertType.success,
+          style: AlertStyle(
+            alertBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            isCloseButton: false,
+          ),
+        ).show();
+
+        quizBrain.reset();
+        scoreKeeper = [];
+        score = 0;
+        return;
+      }
+      var isCorrect = userAnswer == quizBrain.getAnswer();
+      scoreKeeper.add(isCorrect);
+      score += isCorrect ? 1 : 0;
+      quizBrain.nextQuestion();
+    });
+  }
+
+  Widget getButton(bool isTrue) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: FlatButton(
+          color: isTrue ? Colors.green : Colors.red,
+          onPressed: () => addScore(isTrue),
+          child: Text(
+            isTrue ? 'True' : 'False',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18.0,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,64 +91,44 @@ class QuizPageState extends State<QuizPage> {
               flex: 5,
               child: Center(
                 child: Padding(
-                  padding: EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Text(
-                    'This is going to be a question that you\'ll need to answer!',
+                    quizBrain.getQuestion(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 32.0,
+                      fontSize: 28.0,
                     ),
                   ),
                 ),
               ),
             ),
+            getButton(true),
+            getButton(false),
             Expanded(
+              flex: 2,
               child: Padding(
-                padding: EdgeInsets.all(12.0),
-                child: FlatButton(
-                  color: Colors.green,
-                  onPressed: () {},
-                  child: Text(
-                    'True',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                    ),
-                  ),
+                padding: const EdgeInsets.all(16.0),
+                child: Wrap(
+                  runAlignment: WrapAlignment.center,
+                  children: scoreKeeper.map((e) {
+                    return Icon(
+                      e ? Icons.check : Icons.close,
+                      color: e ? Colors.green : Colors.red,
+                    );
+                  }).toList(),
                 ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(12.0),
-                child: FlatButton(
-                  color: Colors.red,
-                  onPressed: () {},
-                  child: Text(
-                    'False',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  ...List.generate(20, (index) => Icon(
-                    index.isEven ? Icons.check : Icons.close,
-                    color: index.isEven ? Colors.green : Colors.red,
-                  )),
-                ],
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    quizBrain  = QuizBrain();
   }
 }
