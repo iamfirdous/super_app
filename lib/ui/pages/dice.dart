@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:super_app/ui/components/custom_app_bar.dart';
+import 'package:super_app/ui/widgets/custom_app_bar.dart';
 
 const ROUTE_DICE = '/dice';
 
@@ -27,7 +27,7 @@ class _DicePageState extends State<DicePage> {
         child: FlatButton(
           padding: const EdgeInsets.all(0),
           onPressed: rollDice,
-          child: Image.asset('assets/images/dice${ isLeft ? leftDice : rightDice }.png'),
+          child: Image.asset('assets/images/dice${isLeft ? leftDice : rightDice}.png'),
         ),
       ),
     );

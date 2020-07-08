@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:super_app/ui/components/custom_app_bar.dart';
+import 'package:super_app/ui/widgets/custom_app_bar.dart';
 
 const ROUTE_MAGIC_8_BALL = '/magic-8-ball';
 
@@ -19,9 +19,7 @@ class _Magic8BallPageState extends State<Magic8BallPage> {
       appBar: CustomAppBar(titleText: 'Magic 8 Ball'),
       body: OrientationBuilder(builder: (context, orientation) {
         return Flex(
-          direction: orientation == Orientation.portrait
-              ? Axis.vertical
-              : Axis.horizontal,
+          direction: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
           children: <Widget>[
             Expanded(
               flex: 1,

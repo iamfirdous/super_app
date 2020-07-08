@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/services.dart';
+import 'package:super_app/models/note.dart';
 
 const ROUTE_XYLOPHONE = '/xylophone';
-
-class Note {
-  final String file;
-  final Color color;
-
-  Note({this.file, this.color});
-}
 
 class XylophonePage extends StatefulWidget {
   @override
@@ -28,6 +22,19 @@ class _XylophonePageState extends State<XylophonePage> {
     Note(file: 'note7.wav', color: Colors.purple),
   ];
   final player = AudioCache(prefix: 'sounds/');
+
+  @override
+  initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    player.loadAll(notes.map((e) => e.file).toList());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +60,5 @@ class _XylophonePageState extends State<XylophonePage> {
         ),
       ),
     );
-  }
-
-  @override
-  initState() {
-    super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    player.loadAll(notes.map((e) => e.file).toList());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 }

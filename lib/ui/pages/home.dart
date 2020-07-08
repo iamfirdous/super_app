@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:super_app/ui/widgets/app_tile.dart';
 
-import 'package:super_app/ui/components/custom_app_bar.dart';
+import 'package:super_app/ui/widgets/custom_app_bar.dart';
+import 'package:super_app/ui/pages/bmi_calculator.dart';
+import 'package:super_app/ui/pages/destini.dart';
 import 'package:super_app/ui/pages/quiz.dart';
 import 'package:super_app/ui/pages/about_dev.dart';
 import 'package:super_app/ui/pages/calculator.dart';
@@ -18,42 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  Widget _getGridTile({
-    @required String imageName,
-    @required String text,
-    @required Function onTap,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.4 , color: Colors.black),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      margin: const EdgeInsets.all(8.0),
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 2,
-              child: Image.asset(
-                imageName,
-                width: 38.0,
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black, fontSize: 11),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,46 +32,54 @@ class HomePageState extends State<HomePage> {
             crossAxisCount: orientation == Orientation.portrait ? 3 : 5,
             padding: const EdgeInsets.all(12),
             children: <Widget>[
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/startup-name.png',
-                text: 'Startup Name Generator',
-                onTap: () =>
-                    Navigator.of(context).pushNamed(ROUTE_RANDOM_WORDS),
+                label: 'Startup Name Generator',
+                onTap: () => Navigator.of(context).pushNamed(ROUTE_RANDOM_WORDS),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/magic-calculator.png',
-                text: 'Magic Calculator',
+                label: 'Magic Calculator',
                 onTap: () => Navigator.of(context).pushNamed(ROUTE_CALCULATOR),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/super-icon.png',
-                text: 'Play Ground',
+                label: 'Play Ground',
                 onTap: () => Navigator.of(context).pushNamed(ROUTE_PLAY_GROUND),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/dice.png',
-                text: 'Dicee',
+                label: 'Dicee',
                 onTap: () => Navigator.of(context).pushNamed(ROUTE_DICE),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/magic-8-ball.png',
-                text: 'Magic 8 Ball',
-                onTap: () =>
-                    Navigator.of(context).pushNamed(ROUTE_MAGIC_8_BALL),
+                label: 'Magic 8 Ball',
+                onTap: () => Navigator.of(context).pushNamed(ROUTE_MAGIC_8_BALL),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/xylophone.png',
-                text: 'Xylophone',
+                label: 'Xylophone',
                 onTap: () => Navigator.of(context).pushNamed(ROUTE_XYLOPHONE),
               ),
-              _getGridTile(
+              AppTile(
                 imageName: 'assets/images/quiz.png',
-                text: 'Quizzler',
-                onTap: () => Navigator.of(context).pushNamed(ROUTE_QUIZ_PAGE),
+                label: 'Quizzler',
+                onTap: () => Navigator.of(context).pushNamed(ROUTE_QUIZZLER),
               ),
-              _getGridTile(
+              AppTile(
+                imageName: 'assets/images/destini.png',
+                label: 'Destini',
+                onTap: () => Navigator.of(context).pushNamed(ROUTE_DESTINI),
+              ),
+              AppTile(
+                imageName: 'assets/images/bmi.png',
+                label: 'BMI Calculator',
+                onTap: () => Navigator.of(context).pushNamed(ROUTE_BMI_CALCULATOR),
+              ),
+              AppTile(
                 imageName: 'assets/images/dev-icon.png',
-                text: 'About Developer',
+                label: 'About Developer',
                 onTap: () => Navigator.of(context).pushNamed(ROUTE_ABOUT_DEV),
               ),
             ],

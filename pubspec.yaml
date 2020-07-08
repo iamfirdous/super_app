@@ -15,8 +15,11 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.3
   english_words: ^3.1.0
-  audioplayers: 0.14.0
+  audioplayers: ^0.14.0
   rflutter_alert: ^1.0.3
+  font_awesome_flutter: ^8.8.1
+  contacts_service: ^0.4.6
+  permission_handler: ^5.0.1+1
 
 dev_dependencies:
   flutter_test:

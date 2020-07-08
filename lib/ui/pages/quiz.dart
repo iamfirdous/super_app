@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:super_app/util/quiz_brain.dart';
+import 'package:super_app/util/styles.dart';
 
-const ROUTE_QUIZ_PAGE = '/quiz-page';
+const ROUTE_QUIZZLER = '/quizzler';
 
 class QuizPage extends StatefulWidget {
   @override
@@ -34,12 +35,7 @@ class QuizPageState extends State<QuizPage> {
             )
           ],
           type: AlertType.success,
-          style: AlertStyle(
-            alertBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            isCloseButton: false,
-          ),
+          style: MyStyles.alertStyle,
         ).show();
 
         quizBrain.reset();
@@ -71,6 +67,12 @@ class QuizPageState extends State<QuizPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    quizBrain = QuizBrain();
   }
 
   @override
@@ -124,11 +126,5 @@ class QuizPageState extends State<QuizPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    quizBrain  = QuizBrain();
   }
 }

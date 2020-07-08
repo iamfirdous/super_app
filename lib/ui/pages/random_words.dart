@@ -1,6 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:super_app/ui/components/custom_app_bar.dart';
+import 'package:super_app/ui/widgets/custom_app_bar.dart';
 
 const ROUTE_RANDOM_WORDS = '/startup-name-generator';
 

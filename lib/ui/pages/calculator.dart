@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:super_app/ui/pages/calculator_secret.dart';
+import 'package:super_app/ui/widgets/calc_button.dart';
 
 const ROUTE_CALCULATOR = '/calculator';
 
@@ -8,35 +10,25 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class CalculatorPageState extends State<CalculatorPage> {
-  List<String> output = [];
+  List<String> input = [];
+  String output = '';
+  String phoneNumber = '';
 
-  Widget _getButton({
-    @required String text,
-    Color color = Colors.black,
-  }) {
-    return Expanded(
-      child: InkResponse(
-        onTap: () => setState(() => output.insert(0, text)),
-        child: Container(
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: color,
-                fontSize: 24,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  List<List<String>> numberButtons = [
+    ['7', '8', '9'],
+    ['4', '5', '6'],
+    ['1', '2', '3'],
+    ['0', '.', '='],
+  ];
 
-  Widget _getNumberRow({@required List<String> numbers}) {
-    return Expanded(
-      child: Row(
-        children: <Widget>[for (var item in numbers) _getButton(text: item)],
-      ),
+  List<String> operators = ['÷', '×', '-', '+'];
+
+  void getPhoneNumber() async {
+    phoneNumber = await Navigator.of(context).pushNamed(ROUTE_CALCULATOR_SECRET) as String;
+    phoneNumber = phoneNumber != null ? phoneNumber.replaceAll(RegExp('[^0-9]'), '') : '';
+    phoneNumber = phoneNumber.replaceAllMapped(
+      new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]},',
     );
   }
 
@@ -54,16 +46,40 @@ class CalculatorPageState extends State<CalculatorPage> {
             flex: 1,
             child: Container(
               color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 24.0, 24.0, 0.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  reverse: true,
-                  children: <Widget>[
-                    for (var item in output)
-                      Text(item, style: TextStyle(fontSize: 42.0, letterSpacing: 4.0),)
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    height: 92.0,
+                    padding: const EdgeInsets.only(top: 24.0, right: 24.0),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      reverse: true,
+                      children: <Widget>[
+                        for (var item in input)
+                          Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 42.0,
+                              letterSpacing: 4.0,
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24.0),
+                    child: Text(
+                      output,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 24.0,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -76,10 +92,34 @@ class CalculatorPageState extends State<CalculatorPage> {
                     flex: 28,
                     child: Column(
                       children: <Widget>[
-                        _getNumberRow(numbers: ['7', '8', '9']),
-                        _getNumberRow(numbers: ['4', '5', '6']),
-                        _getNumberRow(numbers: ['1', '2', '3']),
-                        _getNumberRow(numbers: ['0', '.', '=']),
+                        for (var row in numberButtons)
+                          Expanded(
+                            child: Row(
+                              children: <Widget>[
+                                for (var n in row)
+                                  Expanded(
+                                    child: CalcButton(
+                                      onTap: () => setState(() {
+                                        if (n == '=') {
+                                          input.clear();
+                                          input.insert(0, phoneNumber);
+                                        } else {
+                                          input.insert(0, n);
+                                        }
+                                      }),
+                                      onLongPress: () => n == '=' ? getPhoneNumber() : '',
+                                      child: Text(
+                                        n,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -89,19 +129,34 @@ class CalculatorPageState extends State<CalculatorPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Expanded(
-                          child: InkResponse(
-                            onTap: () => setState(() => output.removeAt(0)),
-                            onLongPress: () => setState(() => output.clear()),
+                          child: CalcButton(
+                            onTap: () => setState(() => input.removeAt(0)),
+                            onLongPress: () => setState(() => input.clear()),
                             child: Icon(
                               Icons.backspace,
                               color: Colors.blue,
                             ),
                           ),
                         ),
-                        _getButton(text: '÷', color: Colors.blue),
-                        _getButton(text: '×', color: Colors.blue),
-                        _getButton(text: '-', color: Colors.blue),
-                        _getButton(text: '+', color: Colors.blue),
+                        for (var text in operators)
+                          Expanded(
+                            child: CalcButton(
+                              onTap: () => setState(() => input.insert(0, text)),
+                              onLongPress: () async {
+                                if (text == '=') {
+                                  phoneNumber = await Navigator.of(context)
+                                      .pushNamed(ROUTE_CALCULATOR_SECRET);
+                                }
+                              },
+                              child: Text(
+                                text,
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
