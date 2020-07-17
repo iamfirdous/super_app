@@ -31,7 +31,7 @@ class Weather {
         city: json['name'] as String,
         icon: '${Constants.WEATHER_ICONS_PATH}$icon.png',
         tempC: '${tempC.toInt()}°C',
-        tempF: '${tempF.toInt()}°C',
+        tempF: '${tempF.toInt()}°F',
         text: json['weather'][0]['main'] as String,
         description: json['weather'][0]['description'] as String,
         background:
