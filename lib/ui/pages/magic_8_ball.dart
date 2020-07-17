@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:super_app/ui/widgets/custom_app_bar.dart';
+import 'package:super_app/util/constants.dart';
 
 const ROUTE_MAGIC_8_BALL = '/magic-8-ball';
 
@@ -42,7 +43,7 @@ class _Magic8BallPageState extends State<Magic8BallPage> {
               child: FlatButton(
                 padding: const EdgeInsets.all(36.0),
                 onPressed: () => setState(() => ballNumber = Random().nextInt(5)),
-                child: Image.asset('assets/images/ball$ballNumber.png'),
+                child: Image.asset('${Constants.IMAGES_PATH}ball$ballNumber.png'),
               ),
             ),
           ],

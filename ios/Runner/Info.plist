@@ -43,5 +43,7 @@
 	<false/>
 	<key>NSContactsUsageDescription</key>  
 	<string>This app requires contacts access to display contact number in magic calculator.</string>  
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open to fetch the weather data.</string>
 </dict>
 </plist>

@@ -8,6 +8,8 @@ import 'package:super_app/ui/pages/calculator_secret.dart';
 import 'package:super_app/ui/pages/destini.dart';
 import 'package:super_app/ui/pages/dice.dart';
 import 'package:super_app/ui/pages/home.dart';
+import 'package:super_app/ui/pages/klymate.dart';
+import 'package:super_app/ui/pages/location_search.dart';
 import 'package:super_app/ui/pages/magic_8_ball.dart';
 import 'package:super_app/ui/pages/play_ground.dart';
 import 'package:super_app/ui/pages/quiz.dart';
@@ -44,6 +46,15 @@ class Router {
       case ROUTE_BMI_RESULT:
         final BMI bmi = args['bmi'] as BMI;
         return MaterialPageRoute(builder: (_) => BMIResultPage(bmi: bmi));
+      case ROUTE_KLYMATE:
+        return MaterialPageRoute(builder: (_) => KlymatePage());
+      case ROUTE_LOCATION_SEARCH:
+        final String backgroundImage = args['backgroundImage'] as String;
+        return MaterialPageRoute(
+          builder: (_) => LocationSearchPage(
+            backgroundImage: backgroundImage,
+          ),
+        );
       case ROUTE_ABOUT_DEV:
         return MaterialPageRoute(builder: (_) => AboutDevPage());
       default:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_app/util/constants.dart';
 
 const ROUTE_PLAY_GROUND = '/play-ground';
 
@@ -14,7 +15,8 @@ class PlayGroundPage extends StatelessWidget {
       ),
       Container(
         child: Image.network(
-            'https://miro.medium.com/max/788/1*X4DyybmnbI3ImjC9XpyvYQ.png'),
+          'https://miro.medium.com/max/788/1*X4DyybmnbI3ImjC9XpyvYQ.png',
+        ),
       ),
       Padding(
         padding: const EdgeInsets.all(24),
@@ -26,7 +28,7 @@ class PlayGroundPage extends StatelessWidget {
       Container(
         child: Center(
           child: Image.asset(
-            'assets/images/super-icon.png',
+            '${Constants.IMAGES_PATH}super-icon.png',
             height: 180,
           ),
         ),

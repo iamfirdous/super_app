@@ -5,7 +5,11 @@ class AppTile extends StatelessWidget {
   final String label;
   final Function onTap;
 
-  const AppTile({@required this.imageName, @required this.label, @required this.onTap});
+  const AppTile({
+    @required this.imageName,
+    @required this.label,
+    @required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_app/util/constants.dart';
 
 const ROUTE_ABOUT_DEV = '/about-dev';
 
@@ -41,7 +42,7 @@ class AboutDevPage extends StatelessWidget {
             CircleAvatar(
               radius: 60.0,
               backgroundColor: Colors.white,
-              backgroundImage: AssetImage('assets/images/myself.png'),
+              backgroundImage: AssetImage('${Constants.IMAGES_PATH}myself.png'),
             ),
             Text(
               'Firdous',
@@ -69,7 +70,7 @@ class AboutDevPage extends StatelessWidget {
             ),
             getInfoCard('+91 00 1234 1234', icon: Icons.phone),
             getInfoCard('firdous@email.com', icon: Icons.email),
-            getInfoCard('iamfirdous', imageAsset: 'assets/images/github.png'),
+            getInfoCard('iamfirdous', imageAsset: '${Constants.IMAGES_PATH}github.png'),
           ],
         ),
       ),

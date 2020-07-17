@@ -134,8 +134,10 @@ class _BMICalculatorPageState extends State<BMICalculatorPage> {
               label: 'CALCULATE',
               onTap: () {
                 BMIBrain bmi = BMIBrain(height: _height, weight: _weight);
-                Navigator.of(context)
-                    .pushNamed(ROUTE_BMI_RESULT, arguments: {'bmi': bmi.calculateBMI()});
+                Navigator.of(context).pushNamed(
+                  ROUTE_BMI_RESULT,
+                  arguments: {'bmi': bmi.calculateBMI()},
+                );
               },
             ),
           ],

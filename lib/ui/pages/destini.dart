@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_app/util/constants.dart';
 import 'package:super_app/util/story_brain.dart';
 
 const ROUTE_DESTINI = '/destini';
@@ -22,7 +23,7 @@ class _DestiniPageState extends State<DestiniPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/bg-destini.png'),
+              image: AssetImage('${Constants.IMAGES_PATH}bg-destini.png'),
               fit: BoxFit.cover),
         ),
         padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
